@@ -84,6 +84,36 @@ const QuestionDetailModal = ({ question, onClose, theme }) => {
               </ul>
             </div>
           )}
+
+          {question.advancedChallenge && (
+            <div className="detail-section" style={{ borderLeft: '4px solid var(--primary-color)', paddingLeft: '1rem', backgroundColor: 'var(--surface-color)', padding: '1rem', borderRadius: '8px', marginTop: '1rem' }}>
+              <h3 style={{ color: 'var(--primary-color)', marginTop: 0 }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width: '20px', height: '20px'}}>
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                Level Up Challenge
+              </h3>
+              <p dangerouslySetInnerHTML={{__html: question.advancedChallenge.replace(/`([^`]+)`/g, '<code>$1</code>')}}></p>
+              
+              {question.advancedHints && question.advancedHints.length > 0 && (
+                <div style={{ marginTop: '1rem' }}>
+                  <h4 style={{ fontSize: '0.95rem', color: '#f59e0b', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width: '16px', height: '16px'}}>
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="16" x2="12" y2="12"></line>
+                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    Pro Hints
+                  </h4>
+                  <ul className="hints-list">
+                    {question.advancedHints.map((hint, idx) => (
+                      <li key={idx} dangerouslySetInnerHTML={{__html: hint.replace(/`([^`]+)`/g, '<code>$1</code>')}} />
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,926 +1,576 @@
 export const questionsData = [
   {
-    "theme": "Harry Potter Theme",
-    "questions": [
+    theme: "Harry Potter Theme",
+    questions: [
       {
-        "id": 1,
-        "title": "Wizard Mad Libs",
-        "summary": "Build a Mad Libs story using variables and user input.",
-        "description": "Ask the user for a wizard name, a magical creature, a spell, and a number. Plug these into a funny Hogwarts story and print it. Practice variables, input(), and string concatenation or f-strings.",
-        "exampleInput": "Name: Harry\nCreature: dragon\nSpell: Lumos\nNumber: 3",
-        "exampleOutput": "Harry cast Lumos 3 times to scare away the dragon!",
-        "hints": [
-          "Use input() to collect each value.",
-          "Use an f-string like f\"{name} cast {spell}...\" to build the final message.",
-          "Remember input() always returns a string."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 1,
+        title: "Hogwarts Shortest Path (Dijkstra)",
+        summary: "Find the quickest route between magical locations avoiding moving staircases.",
+        description: "Given a graph of Hogwarts locations where edges represent travel time in minutes, write a function using Dijkstra's algorithm to find the shortest path from the 'Gryffindor Common Room' to the 'Potions Classroom'. Some corridors have a 'moving staircase' modifier that adds a dynamic 5-minute penalty if visited at an odd minute.",
+        exampleInput: "graph = {'Gryffindor': {'Great Hall': 3}, 'Great Hall': {'Potions': 4...}}",
+        exampleOutput: "Path: ['Gryffindor', 'Great Hall', 'Potions'], Time: 7 mins",
+        hints: ["Use `heapq` for your priority queue.", "Track the current time to determine if a dynamic penalty applies at the next node."],
+        advancedChallenge: "Level Up: Also return the *second* shortest path.",
+        advancedHints: ["Consider using Yen's algorithm or keeping track of multiple paths per node."]
       },
       {
-        "id": 2,
-        "title": "Potion Ingredient Converter",
-        "summary": "Use type casting to convert input into numbers.",
-        "description": "Ask the user how many grams of an ingredient they have. The input is a string — convert it to a float. Then convert grams to ounces (1 oz = 28.35 g) and print the result. Practice type casting with int() and float().",
-        "exampleInput": "Grams: 100",
-        "exampleOutput": "100.0 g = 3.53 oz",
-        "hints": [
-          "Use float(input(...)) to cast the string to a number.",
-          "Divide grams by 28.35 to get ounces.",
-          "Use an f-string with :.2f to show 2 decimal places."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 2,
+        title: "Polyjuice Potion Knapsack",
+        summary: "Maximize the magical potency of a potion given a cauldron's weight limit.",
+        description: "You have a list of rare ingredients. Each has a `weight` (g) and a `potency` score. The cauldron can hold a maximum of `W` grams before exploding. Write a dynamic programming solution to find the maximum possible potency.",
+        exampleInput: "items = [(weight: 10, potency: 60), (20, 100), (30, 120)], W = 50",
+        exampleOutput: "Max potency: 220 (items 1, 2, 3... wait, 10+20+30 > 50. Output: 220 using (20,100) and (30,120))",
+        hints: ["This is the classic 0/1 Knapsack problem.", "Create a 2D array or use a 1D array optimized DP table."],
+        advancedChallenge: "Level Up: Reconstruct and return the exact list of ingredients used.",
+        advancedHints: ["Trace back through your DP table from the bottom right to the top left."]
       },
       {
-        "id": 3,
-        "title": "Spell Damage Calculator",
-        "summary": "Use arithmetic operators and math functions.",
-        "description": "Write a small calculator. Ask the user for a spell's base damage and a power multiplier. Compute: total = base * multiplier, then print the square root of the total using the math module. Practice arithmetic operators and importing math.",
-        "exampleInput": "Base: 20\nMultiplier: 4",
-        "exampleOutput": "Total damage: 80\nSqrt: 8.94",
-        "hints": [
-          "import math at the top.",
-          "Use math.sqrt() for the square root.",
-          "Cast the inputs to int or float before doing math."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 3,
+        title: "Wand Compatibility Matrix",
+        summary: "Assign wizards to wands to maximize overall magical resonance.",
+        description: "You are Ollivander. You have `N` wizards and `N` wands. You are given an `N x N` matrix where `matrix[i][j]` is the compatibility score of wizard `i` with wand `j`. Use the Hungarian algorithm (or minimum weight bipartite matching) to find the assignment that maximizes total compatibility.",
+        exampleInput: "scores = [[4, 1, 5], [2, 3, 3], [5, 2, 1]]",
+        exampleOutput: "Max compatibility: 11 (Wizard 0 -> Wand 2, Wizard 1 -> Wand 1, Wizard 2 -> Wand 0)",
+        hints: ["You can use `scipy.optimize.linear_sum_assignment` if allowed, or implement it yourself.", "If implementing from scratch, look into augmenting paths or the min-cost max-flow approach."],
+        advancedChallenge: "Level Up: Solve it without importing external libraries.",
+        advancedHints: ["Implementing the Hungarian algorithm from scratch requires a cost matrix, row/column reductions, and covering zeros."]
       },
       {
-        "id": 4,
-        "title": "Hogwarts House Sorter",
-        "summary": "Use if / elif / else to sort students into houses.",
-        "description": "Ask the user for their favorite trait: 'brave', 'smart', 'kind', or 'cunning'. Use if/elif/else to print their Hogwarts house (Gryffindor, Ravenclaw, Hufflepuff, Slytherin). If the trait isn't recognized, print a default message.",
-        "exampleInput": "Trait: brave",
-        "exampleOutput": "You belong in Gryffindor!",
-        "hints": [
-          "Use .lower() on the input so capitalization doesn't matter.",
-          "Chain if / elif / else for each house.",
-          "Add a final else for unknown traits."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 4,
+        title: "Marauder's Map Event Sorter",
+        summary: "Sort a complex stream of student movement logs.",
+        description: "You receive a JSON string of student logs: `[{'name': 'Harry', 'room': 'Kitchen', 'timestamp': '2023-10-31T23:55:00Z', 'suspicion': 8}, ...]`. Sort the logs primarily by `suspicion` (descending), then by `room` (alphabetically), and finally by `timestamp` (chronologically).",
+        exampleInput: "[{'name': 'Ron', 'suspicion': 8, 'room': 'A', ...}, {'name': 'Harry', 'suspicion': 8, 'room': 'B', ...}]",
+        exampleOutput: "Sorted list of dictionaries based on the 3 criteria.",
+        hints: ["Use the `key` argument in `sorted()` or `.sort()`.", "You can return a tuple in the lambda: `lambda x: (-x['suspicion'], x['room'], x['timestamp'])`."],
+        advancedChallenge: "Level Up: Parse the timestamps into localized aware datetime objects before sorting.",
+        advancedHints: ["Use `datetime.fromisoformat()` to parse the ISO8601 strings."]
       },
       {
-        "id": 5,
-        "title": "Wand Compatibility Check",
-        "summary": "Use logical operators (and / or / not) in conditions.",
-        "description": "Ask the user for their age and whether they have a magical family (yes/no). A wand is allowed if age >= 11 AND they either have a magical family OR passed a magic test (ask for that too). Use and / or to build the condition.",
-        "exampleInput": "Age: 12\nMagical family: no\nPassed test: yes",
-        "exampleOutput": "The wand chooses you!",
-        "hints": [
-          "Cast age to int.",
-          "Combine conditions with 'and' and 'or'.",
-          "Convert yes/no answers into booleans like family == 'yes'."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 5,
+        title: "Spell Dependency Resolution",
+        summary: "Use topological sorting to determine the order of spells to learn.",
+        description: "Advanced spells require mastering basic spells first. Given a dictionary of dependencies `{'Expecto Patronum': ['Lumos', 'Riddikulus'], 'Riddikulus': ['Boggart-Banishing']}...`, write a function that outputs a valid sequence to learn all spells. Detect cyclic dependencies and raise a custom `DarkMagicException`.",
+        exampleInput: "deps = {'A': ['B', 'C'], 'B': ['C'], 'C': []}",
+        exampleOutput: "['C', 'B', 'A']",
+        hints: ["Use Kahn's algorithm or DFS with visited/visiting states.", "A cycle exists if you encounter a node currently in the 'visiting' state."],
+        advancedChallenge: "Level Up: Return all possible valid learning sequences.",
+        advancedHints: ["Use backtracking to explore all valid topological sorts instead of just one."]
       },
       {
-        "id": 6,
-        "title": "Patronus Letter Finder",
-        "summary": "Use string methods and indexing.",
-        "description": "Ask the user to type the name of their Patronus. Print the first letter, the last letter, the length of the name, and the name in all uppercase. Practice indexing (name[0]) and string methods (.upper(), len()).",
-        "exampleInput": "Patronus: Stag",
-        "exampleOutput": "First: S, Last: g, Length: 4, Upper: STAG",
-        "hints": [
-          "name[0] gives the first character.",
-          "name[-1] gives the last.",
-          "Use len(name) and name.upper()."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 6,
+        title: "Triwizard Maze Backtracking",
+        summary: "Find all paths through a maze with limited energy.",
+        description: "Given a 2D grid representing the Triwizard maze, start at `(0,0)` and reach `(N-1, N-1)`. Some cells contain Blast-Ended Skrewts (cost 10 energy) or empty space (cost 1 energy). Write a backtracking function to find all valid paths that cost less than or equal to `MAX_ENERGY`.",
+        exampleInput: "grid = [[1, 10], [1, 1]], MAX_ENERGY = 5",
+        exampleOutput: "Paths: [[(0,0), (1,0), (1,1)]]",
+        hints: ["Pass the current path and current energy down the recursive calls.", "Don't forget to mark cells as visited and unmark them when backtracking."],
+        advancedChallenge: "Level Up: Include portkeys that teleport you to specific coordinates instantly.",
+        advancedHints: ["Add a dictionary mapping `(r, c)` to `(new_r, new_c)` and update the current coordinates inside your recursive step."]
       },
       {
-        "id": 7,
-        "title": "Polyjuice Countdown",
-        "summary": "Use a while loop to count down transformation time.",
-        "description": "A Polyjuice Potion lasts 60 minutes. Use a while loop to count down from 60 to 1, printing each minute. When the counter reaches 0, print 'Transformation ended!'. Practice while loops and decrementing a variable.",
-        "exampleInput": "(no input)",
-        "exampleOutput": "60 minutes left\n59 minutes left\n...\nTransformation ended!",
-        "hints": [
-          "Start with minutes = 60.",
-          "Loop while minutes > 0, subtracting 1 each time.",
-          "Print the final message after the loop."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 7,
+        title: "Boggart Shape Shifter",
+        summary: "Implement a robust State Machine.",
+        description: "A Boggart changes shape depending on the state of the wizard facing it. Implement a finite state machine (FSM) class. States: `IDLE`, `FEAR`, `CONFUSED`, `VANISHED`. Transitions require specific spells. e.g., `FEAR` + `Riddikulus` -> `CONFUSED`. If an invalid spell is cast for the current state, raise an error.",
+        exampleInput: "b = Boggart(); b.cast('Scare'); b.cast('Riddikulus')",
+        exampleOutput: "State transitions from IDLE to FEAR, then FEAR to CONFUSED.",
+        hints: ["Use a dictionary to map `(current_state, action)` to `next_state`.", "Handle invalid transitions gracefully."],
+        advancedChallenge: "Level Up: Implement this using the State Design Pattern with separate classes for each State.",
+        advancedHints: ["Each State class should implement an `on_cast()` method that returns the next State instance."]
       },
       {
-        "id": 8,
-        "title": "Quidditch Scoreboard",
-        "summary": "Use a for loop and a list to total scores.",
-        "description": "You have a list of Gryffindor goals in a match, each worth 10 points: goals = [10, 10, 10, 10]. Use a for loop to add them up and print the total. Also print how many goals were scored using len().",
-        "exampleInput": "goals = [10, 10, 10, 10]",
-        "exampleOutput": "Total: 40 points over 4 goals",
-        "hints": [
-          "Create a variable total = 0.",
-          "Loop: for g in goals: total += g.",
-          "Use len(goals) for goal count."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 8,
+        title: "Parseltongue Translator",
+        summary: "Build an advanced Regex parser.",
+        description: "Parseltongue text looks like `'Sss[open] shh sss[door]!'`. Write a regex parser that extracts the hidden English commands located inside brackets, but only if they are preceded by exactly three 's' characters (case-insensitive).",
+        exampleInput: "text = 'sss[hello] SSs[world] ss[ignored]'",
+        exampleOutput: "['hello', 'world']",
+        hints: ["Use the `re` module.", "Look into positive lookbehinds: `(?<=[sS]{3})\[(.*?)\]`."],
+        advancedChallenge: "Level Up: Replace the brackets and English words with encrypted hex values in the original string.",
+        advancedHints: ["Use `re.sub()` with a callable function to dynamically generate replacements."]
       },
       {
-        "id": 9,
-        "title": "House Points Dictionary",
-        "summary": "Use a dictionary to track house points.",
-        "description": "Create a dictionary with the four Hogwarts houses and starting points of 0. Ask the user which house earned points and how many, and update the dictionary. Print the final dictionary. Practice dictionary creation and updating values.",
-        "exampleInput": "House: Gryffindor\nPoints: 50",
-        "exampleOutput": "{'Gryffindor': 50, 'Slytherin': 0, 'Ravenclaw': 0, 'Hufflepuff': 0}",
-        "hints": [
-          "Initialize: points = {'Gryffindor': 0, ...}.",
-          "Update with points[house] += amount.",
-          "Make sure to cast the points input to int."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 9,
+        title: "Horcrux Memory Leak",
+        summary: "Implement a custom memory manager / cache with LRU eviction.",
+        description: "You must process thousands of magical memories. Implement a custom `MemoryCache` class using an OrderedDict or a combination of a dict and a doubly linked list. It should have `get(key)` and `put(key, value)` with `O(1)` time complexity. Max capacity is `N`.",
+        exampleInput: "cache = MemoryCache(2); cache.put(1, 'A'); cache.put(2, 'B'); cache.put(3, 'C')",
+        exampleOutput: "cache.get(1) returns -1 (evicted)",
+        hints: ["`collections.OrderedDict` provides `move_to_end()` and `popitem(last=False)`.", "Every `get` or `update` must move the item to the 'most recently used' end."],
+        advancedChallenge: "Level Up: Add an expiration TTL (Time To Live) to each item.",
+        advancedHints: ["Store `(value, expiry_timestamp)` and lazily evict expired items during `get()` calls."]
       },
       {
-        "id": 10,
-        "title": "Spell Caster Function",
-        "summary": "Write a function with default and keyword arguments.",
-        "description": "Define a function cast_spell(wizard, spell='Lumos', power=1). It should print a line like 'Harry casts Lumos with power 1!'. Call it with just a wizard name, then with keyword arguments, to practice default and keyword arguments.",
-        "exampleInput": "cast_spell('Harry')\ncast_spell('Hermione', spell='Expelliarmus', power=3)",
-        "exampleOutput": "Harry casts Lumos with power 1!\nHermione casts Expelliarmus with power 3!",
-        "hints": [
-          "Default values go in the parameter list: spell='Lumos'.",
-          "Call with keyword args like spell='Expelliarmus'.",
-          "Use an f-string inside the function to print."
-        ],
-        "advancedChallenge": "Level Up: Refactor this logic into an Object-Oriented approach. Create a class (e.g., `Wizard`, `Spell`) with an `__init__` method. Add robust `try/except` blocks to handle invalid magic or missing ingredients gracefully.",
-        "advancedHints": [
-          "Define a class with `class Name:` and add methods for the actions.",
-          "Use `try:` and `except ValueError:` when taking user input to prevent crashes."
-        ]
+        id: 10,
+        title: "O.W.L. Exam Concurrency",
+        summary: "Use multithreading/asyncio to grade exams simultaneously.",
+        description: "You have 100 exam papers (represented by strings). Grading one paper takes `time.sleep(0.1)` simulating heavy processing. Use `concurrent.futures.ThreadPoolExecutor` or `asyncio` to grade all 100 papers in less than 2 seconds.",
+        exampleInput: "papers = ['paper1', 'paper2', ...]",
+        exampleOutput: "All 100 papers graded in ~1.something seconds.",
+        hints: ["If using `ThreadPoolExecutor`, use `executor.map()`.", "If using `asyncio`, define an `async def` and use `asyncio.gather()`."],
+        advancedChallenge: "Level Up: Handle random `GradingFailures` by automatically retrying failed papers up to 3 times.",
+        advancedHints: ["Wrap your worker function in a try/except loop that breaks on success or raises after 3 attempts."]
       }
     ]
   },
   {
-    "theme": "Airplanes / Aviation Theme",
-    "questions": [
+    theme: "Airplanes / Aviation Theme",
+    questions: [
       {
-        "id": 11,
-        "title": "Flight Announcement Mad Libs",
-        "summary": "Mad Libs style input/print practice.",
-        "description": "Ask the user for a destination, a captain's name, a flight number, and an altitude. Print a full boarding announcement using an f-string. Practice input(), variables, and f-strings.",
-        "exampleInput": "Destination: Tokyo\nCaptain: Smith\nFlight: 101\nAltitude: 35000",
-        "exampleOutput": "Welcome aboard Flight 101 to Tokyo. Captain Smith will fly at 35000 ft.",
-        "hints": [
-          "Store each input in its own variable.",
-          "Use f\"...{destination}...\" to build the announcement.",
-          "Keep values as strings — no casting needed here."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 11,
+        title: "Runway Interval Scheduling",
+        summary: "Solve the greedy interval scheduling maximization problem.",
+        description: "Given a list of flight requests with `start` and `end` times, find the maximum number of flights that can land on a single runway without any overlapping times.",
+        exampleInput: "flights = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 9), (5, 9), (6, 10), (8, 11), (8, 12), (2, 14), (12, 16)]",
+        exampleOutput: "Max flights: 4 (e.g., (1,4), (5,7), (8,11), (12,16))",
+        hints: ["Sort the flights by their `end` times.", "Iterate through the sorted list and greedily pick the next flight that starts after the last selected flight ends."],
+        advancedChallenge: "Level Up: Assume you have `K` runways. Maximize the total flights across all runways.",
+        advancedHints: ["Keep track of the end times for all `K` runways (e.g., using a min-heap) and assign the flight to the runway that frees up earliest but before the flight's start time."]
       },
       {
-        "id": 12,
-        "title": "Ticket Price Converter",
-        "summary": "Type cast strings into numbers to apply a discount.",
-        "description": "Ask the user for a ticket price as a string, cast it to a float, apply a 10% discount, and print the new price. Practice float() casting and arithmetic.",
-        "exampleInput": "Price: 250",
-        "exampleOutput": "Discounted price: $225.00",
-        "hints": [
-          "Cast with float(input(...)).",
-          "Multiply by 0.9 for a 10% discount.",
-          "Use :.2f to format currency."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 12,
+        title: "Flight Crew Constraint Satisfaction",
+        summary: "Assign crew members to flights based on strict union rules.",
+        description: "You have `M` pilots and `N` flights. Each pilot has `max_hours`, a list of `certified_planes`, and requires 10 hours rest between flights. Assign pilots to flights using Backtracking and Constraint Satisfaction Problem (CSP) techniques. Return a valid assignment or 'No valid roster'.",
+        exampleInput: "pilots = [...], flights = [...]",
+        exampleOutput: "{'Flight1': 'Pilot A', 'Flight2': 'Pilot B'}",
+        hints: ["Order your variables (flights) heuristically (e.g., Most Constrained Variable).", "Use forward checking to eliminate invalid pilots early."],
+        advancedChallenge: "Level Up: Optimize for minimum total layover time across all pilots.",
+        advancedHints: ["Instead of stopping at the first valid assignment, use Branch and Bound to find the optimal assignment."]
       },
       {
-        "id": 13,
-        "title": "Fuel Cost Calculator",
-        "summary": "Build a small arithmetic calculator.",
-        "description": "Ask the user for miles to fly, the plane's miles-per-gallon, and fuel price per gallon. Compute gallons_needed = miles / mpg, total_cost = gallons_needed * price. Print both values. Practice arithmetic operators.",
-        "exampleInput": "Miles: 500\nMPG: 5\nPrice: 4",
-        "exampleOutput": "Gallons: 100.0, Cost: $400.00",
-        "hints": [
-          "Cast all inputs to float.",
-          "Divide miles by mpg.",
-          "Use :.2f for the cost."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 13,
+        title: "Air Traffic Collision Detection",
+        summary: "Find the closest pair of planes in 3D space.",
+        description: "Given a list of `(x, y, z)` coordinates for 100,000 planes, write an algorithm to find the two planes that are closest to each other. An `O(N^2)` brute-force solution will time out. Use a divide-and-conquer approach or a 3D KD-Tree to achieve `O(N log N)`.",
+        exampleInput: "coords = [(1, 2, 3), (4, 5, 6), (1.1, 2.1, 3.1)]",
+        exampleOutput: "Closest pair: (1, 2, 3) and (1.1, 2.1, 3.1)",
+        hints: ["If implementing divide-and-conquer, sort by X first, recursively find the min in left/right halves, then check the cross-boundary strip.", "A KD-Tree (`scipy.spatial.KDTree`) makes this trivial, but try implementing the core logic."],
+        advancedChallenge: "Level Up: Handle planes that are moving (each has a velocity vector). Find the closest pair *at any point in the next 10 minutes*.",
+        advancedHints: ["The distance between two planes is a quadratic function of time. You need to minimize this function over the interval [0, 10]."]
       },
       {
-        "id": 14,
-        "title": "Baggage Weight Converter",
-        "summary": "Kg-to-lbs converter (weight conversion project).",
-        "description": "Ask the user for a baggage weight and a unit ('kg' or 'lbs'). If kg, convert to lbs (lbs = kg * 2.205). If lbs, convert to kg. Otherwise print 'Unknown unit'. Practice if/elif/else and float casting.",
-        "exampleInput": "Weight: 20\nUnit: kg",
-        "exampleOutput": "20 kg = 44.10 lbs",
-        "hints": [
-          "Use .lower() on the unit input.",
-          "Check unit == 'kg' or 'lbs' with if/elif.",
-          "Round or format using :.2f."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 14,
+        title: "Luggage Routing Network Max Flow",
+        summary: "Use the Ford-Fulkerson algorithm.",
+        description: "Baggage is routed through a network of conveyor belts from Check-in (Source) to the Plane (Sink). Each belt has a maximum capacity (bags per minute). Calculate the maximum number of bags per minute that can reach the plane.",
+        exampleInput: "graph = {'Checkin': {'BeltA': 10, 'BeltB': 5}, 'BeltA': {'Plane': 10}...}",
+        exampleOutput: "Max Flow: 15 bags/min",
+        hints: ["Implement BFS to find augmenting paths (Edmonds-Karp).", "Keep track of residual capacities on the back-edges."],
+        advancedChallenge: "Level Up: Find the 'bottleneck' belt (Minimum Cut).",
+        advancedHints: ["After running max flow, do a BFS from the source on the residual graph. Edges from the visited set to the unvisited set form the min cut."]
       },
       {
-        "id": 15,
-        "title": "Cabin Temperature Converter",
-        "summary": "Fahrenheit / Celsius converter.",
-        "description": "Ask the user for a temperature and a unit ('C' or 'F'). Convert C to F: F = C * 9/5 + 32 or vice versa. Print the result using an f-string. Practice conditionals and arithmetic.",
-        "exampleInput": "Temp: 25\nUnit: C",
-        "exampleOutput": "25 C = 77.0 F",
-        "hints": [
-          "Cast temp to float.",
-          "Use an if/elif on the unit.",
-          "Keep the formula simple and direct."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 15,
+        title: "Frequent Flyer SQL-like Aggregation",
+        summary: "Process massive CSVs using pandas or itertools.",
+        description: "You have a massive generator yielding flight records `{'user': ID, 'miles': int, 'class': str}`. Write a function that calculates the top 5 users by total miles, but ONLY counts miles flown in 'First' or 'Business' class. Do not load all records into memory at once.",
+        exampleInput: "def stream(): yield {'user': 1, 'miles': 500, 'class': 'First'}...",
+        exampleOutput: "[User 42 (15000), User 7 (12000)...]",
+        hints: ["Use `collections.defaultdict(int)` to accumulate miles.", "Process the stream lazily with a `for` loop, then sort the dictionary items at the very end."],
+        advancedChallenge: "Level Up: Maintain a running 'Top 5' leaderboard during the stream using a Min-Heap.",
+        advancedHints: ["Use `heapq`. Whenever you update a user's score, it's tricky because heaps don't support fast updates. Consider storing a separate dict of current scores and pushing new `(score, user)` tuples, ignoring stale ones on pop."]
       },
       {
-        "id": 16,
-        "title": "Boarding Pass Formatter",
-        "summary": "String methods and format specifiers.",
-        "description": "Given name = 'john doe', flight = 'AA101', seat = '12B', print a boarding pass using f-string formatting. The name must be title-cased, the flight uppercase, and the whole line padded to 40 characters.",
-        "exampleInput": "name='john doe', flight='aa101', seat='12B'",
-        "exampleOutput": "John Doe | AA101 | 12B             (40 chars)",
-        "hints": [
-          "Use name.title() to capitalize words.",
-          "Use flight.upper().",
-          "Use :<40 in an f-string to pad to 40 chars."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 16,
+        title: "Aircraft Sensor Telemetry Parser",
+        summary: "Parse and validate complex nested JSON using Pydantic or Dataclasses.",
+        description: "You receive raw JSON telemetry data from an aircraft. Define strict Data Classes (or Pydantic models) to parse it. Ensure `altitude` is a positive float, `coordinates` is a valid tuple of `(lat, lon)`, and `engine_status` is an Enum. Raise detailed validation errors.",
+        exampleInput: "{'altitude': -500, 'coordinates': [95.0, -200.0], 'engine': 'UNKNOWN'}",
+        exampleOutput: "ValidationErrors: altitude must be > 0, lat must be [-90,90], etc.",
+        hints: ["Using `pydantic` makes this very easy with `validator` decorators.", "If using standard library, use `@dataclass` and implement a `__post_init__` method."],
+        advancedChallenge: "Level Up: Write a custom JSON encoder to serialize your Data Classes back to JSON smoothly.",
+        advancedHints: ["Inherit from `json.JSONEncoder` and override the `default()` method to handle Enums and custom classes."]
       },
       {
-        "id": 17,
-        "title": "Flight Departure Countdown",
-        "summary": "While loop countdown timer.",
-        "description": "Use a while loop to count down from 10 to 0 for takeoff. Use the time module (import time) to sleep 1 second between numbers. Print 'Liftoff!' at the end. Practice while loops and importing modules.",
-        "exampleInput": "(no input)",
-        "exampleOutput": "10\n9\n8\n...\n0\nLiftoff!",
-        "hints": [
-          "import time at the top.",
-          "Use time.sleep(1) inside the loop.",
-          "Decrement your counter each iteration."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 17,
+        title: "Delay Propagation Simulation",
+        summary: "Simulate a cascading network failure.",
+        description: "A plane flies A -> B -> C. If A -> B is delayed by 30 mins, B -> C is delayed, which delays other flights sharing the runway at B. Given a list of flights and their plane/runway dependencies, write a discrete-event simulation to propagate a 60-minute delay of the first flight through the entire network.",
+        exampleInput: "Dependency graph of flights.",
+        exampleOutput: "Final arrival time of the last flight in the network.",
+        hints: ["Use a priority queue (event queue) where events are `(time, action, flight_id)`.", "Process events chronologically and update dependent flights when a delay occurs."],
+        advancedChallenge: "Level Up: Introduce 'buffer times' and 'crew swaps' that can absorb delays.",
+        advancedHints: ["Add logic to check if a delay is completely absorbed by the gap between scheduled landing and the next takeoff."]
       },
       {
-        "id": 18,
-        "title": "Passenger Name Printer",
-        "summary": "Iterate a list with a for loop.",
-        "description": "Given passengers = ['Alice', 'Bob', 'Charlie', 'Diana'], use a for loop to print each passenger with their seat number starting at 1: 'Seat 1: Alice'. Use enumerate() if you want. Practice for loops and lists.",
-        "exampleInput": "passengers = ['Alice', 'Bob', 'Charlie', 'Diana']",
-        "exampleOutput": "Seat 1: Alice\nSeat 2: Bob\nSeat 3: Charlie\nSeat 4: Diana",
-        "hints": [
-          "Use enumerate(passengers, start=1).",
-          "Or use a counter variable and += 1.",
-          "Use an f-string for the output line."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 18,
+        title: "Ticket Pricing Trie",
+        summary: "Build an efficient prefix tree for flight routes.",
+        description: "You have millions of route pricing rules based on prefixes (e.g., 'US-CA-*' is $100, 'US-CA-LAX' is $150). Implement a Trie (Prefix Tree) to quickly look up the most specific price rule for a given exact route like 'US-CA-LAX'.",
+        exampleInput: "insert('US-CA-*', 100), insert('US-CA-LAX', 150). search('US-CA-SFO')",
+        exampleOutput: "Returns 100 (matches 'US-CA-*')",
+        hints: ["Each node in the Trie represents a character or segment.", "During search, keep track of the last valid price seen as you traverse down the tree."],
+        advancedChallenge: "Level Up: Support wildcard matching in the middle of the string (e.g., 'US-*-LAX').",
+        advancedHints: ["When encountering a `*` in the search, you must recursively check all child branches to find the best match."]
       },
       {
-        "id": 19,
-        "title": "Flight Route Tuple",
-        "summary": "Store immutable flight data in tuples.",
-        "description": "Create a list of flight tuples: (flight_number, origin, destination). Use a for loop to unpack and print each. Practice tuples, lists of tuples, and tuple unpacking in a loop.",
-        "exampleInput": "flights = [('AA101', 'NYC', 'LA'), ('BA202', 'LON', 'PAR')]",
-        "exampleOutput": "AA101: NYC -> LA\nBA202: LON -> PAR",
-        "hints": [
-          "Tuples use parentheses: ('AA101', 'NYC', 'LA').",
-          "Unpack in the loop: for num, origin, dest in flights.",
-          "Use an f-string to format the arrow."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 19,
+        title: "Black Box Binary Decoder",
+        summary: "Read and decode packed binary data.",
+        description: "A black box records data in packed binary format. Every 8 bytes represents: 4 bytes unsigned int (timestamp), 2 bytes signed short (altitude), 2 bytes unsigned short (speed). Use the `struct` module to read a binary string and unpack it into a list of dictionaries.",
+        exampleInput: "b'\\x00\\x00\\x01\\xff\\xff\\x9c\\x01\\x04'",
+        exampleOutput: "[{'timestamp': 511, 'altitude': -100, 'speed': 260}]",
+        hints: ["Look at `struct.unpack('>IhH', data)`.", "Pay attention to endianness (big-endian vs little-endian)."],
+        advancedChallenge: "Level Up: Implement an iterator that reads directly from a binary file chunk-by-chunk without loading the whole file into memory.",
+        advancedHints: ["Use `f.read(8)` in a `while` loop and `yield` the parsed dictionaries."]
       },
       {
-        "id": 20,
-        "title": "Total Miles with *args",
-        "summary": "Function using *args to sum any number of flights.",
-        "description": "Write a function total_miles(*flights) that takes any number of flight distances and returns the total. Call it with different numbers of arguments. Practice *args and function return values.",
-        "exampleInput": "total_miles(500, 300, 200)",
-        "exampleOutput": "1000",
-        "hints": [
-          "Define the function with *flights in the parameter list.",
-          "Inside, flights is a tuple — use sum(flights).",
-          "Return the result and print it at the call site."
-        ],
-        "advancedChallenge": "Level Up: Batch processing. Instead of one input, imagine you receive a comma-separated string of 10 flight records. Use list comprehensions and `split()` to process them all at once. Filter out any invalid data.",
-        "advancedHints": [
-          "Use `[x for x in records if ...]` to filter and transform the data in one line.",
-          "Look into the `csv` module or just use `.split(',')`."
-        ]
+        id: 20,
+        title: "Aircraft Maintenance Decorators",
+        summary: "Use decorators for access control and logging.",
+        description: "Write a `@requires_clearance(level)` decorator. Apply it to functions like `override_autopilot()`. The decorator must check a global `CURRENT_USER['clearance']` and raise a `PermissionError` if it's too low. Also, write a `@log_action` decorator and stack both on the function.",
+        exampleInput: "@requires_clearance(5)\n@log_action\ndef land_plane(): ...",
+        exampleOutput: "Logs the attempt, then raises PermissionError if clearance < 5.",
+        hints: ["Decorators that take arguments require three levels of nested functions: `decorator_maker(args) -> decorator(func) -> wrapper(*args)`.", "Use `functools.wraps(func)` to preserve function metadata."],
+        advancedChallenge: "Level Up: Make `@requires_clearance` accept a list of roles instead of an integer level.",
+        advancedHints: ["Check `if CURRENT_USER['role'] not in allowed_roles: raise ...`"]
       }
     ]
   },
   {
-    "theme": "Fantasy Kingdom Theme",
-    "questions": [
+    theme: "Fantasy Kingdom Theme",
+    questions: [
       {
-        "id": 21,
-        "title": "Gate Password Check",
-        "summary": "If/else password validator.",
-        "description": "Ask the user for the castle password. If it equals 'dragon', print 'Gate opens!'. Otherwise print 'Guards attack!'. Practice input() and a simple if/else.",
-        "exampleInput": "Password: dragon",
-        "exampleOutput": "Gate opens!",
-        "hints": [
-          "Use input() to read the password.",
-          "Compare with == 'dragon'.",
-          "Use .lower() to make it case-insensitive."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 21,
+        title: "A* Pathfinding in the Dungeon",
+        summary: "Implement the A* search algorithm for optimal pathfinding.",
+        description: "Given a 2D grid where `0` is floor, `1` is a wall, and `2` is mud (costs 3 movement), write an A* pathfinding algorithm to find the lowest-cost path from `(start_x, start_y)` to `(end_x, end_y)`. Use the Manhattan distance as your heuristic.",
+        exampleInput: "grid = [[0, 1, 0], [0, 2, 0], [0, 0, 0]]",
+        exampleOutput: "Path and total movement cost.",
+        hints: ["Maintain a priority queue storing `(f_score, current_node)`.", "`f_score = g_score (actual cost so far) + h_score (heuristic estimate).`"],
+        advancedChallenge: "Level Up: Support diagonal movement with a cost of 1.4.",
+        advancedHints: ["Update your neighbor generation logic and use Chebyshev or Euclidean distance for the heuristic."]
       },
       {
-        "id": 22,
-        "title": "Dragon Entry Requirements",
-        "summary": "Combine conditions with logical operators.",
-        "description": "A hero can enter the dragon's lair if they have a sword AND (a shield OR a potion). Ask the user yes/no for each item. Use and / or to decide. Practice logical operators.",
-        "exampleInput": "Sword: yes\nShield: no\nPotion: yes",
-        "exampleOutput": "You may enter the lair.",
-        "hints": [
-          "Convert each yes/no to a boolean like sword = (answer == 'yes').",
-          "Combine with: if sword and (shield or potion).",
-          "Print the right message in each branch."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 22,
+        title: "Kingdom Tax Optimizer (Linear Programming)",
+        summary: "Maximize tax revenue under constraints.",
+        description: "The King wants to maximize tax revenue. You can tax Farmers, Merchants, and Nobles. Farmers yield 10g, Merchants 50g, Nobles 200g. However, total tax events can't exceed 1000, Merchants taxed must be <= Farmers / 2, and Nobles taxed <= Merchants / 5. Solve this using linear programming (`scipy.optimize.linprog`).",
+        exampleInput: "Constraints as described.",
+        exampleOutput: "Optimal number of each class to tax.",
+        hints: ["Define the objective function coefficients as negative for maximization.", "Write out the inequality constraints carefully: `Merchants - 0.5 * Farmers <= 0`."],
+        advancedChallenge: "Level Up: Solve it purely iteratively or using integer linear programming.",
+        advancedHints: ["Since people must be integers, you can use PulP or formulate a branch and bound wrapper."]
       },
       {
-        "id": 23,
-        "title": "Hero Class Selector",
-        "summary": "Match-case statement to pick a class.",
-        "description": "Ask the user to pick a class: 'warrior', 'mage', 'rogue', or 'archer'. Use a match-case statement (Python 3.10+) to print a matching description for each. Add a default case for unknown values. Practice match-case.",
-        "exampleInput": "Class: mage",
-        "exampleOutput": "You wield arcane magic and study ancient tomes.",
-        "hints": [
-          "Use: match choice:\\n    case 'warrior': ...",
-          "Remember the 'case _:' default at the end.",
-          "Lowercase the input first for consistency."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 23,
+        title: "Dragon DNA Longest Common Subsequence",
+        summary: "Find the longest shared genetic sequence between two dragon species.",
+        description: "You have two strings representing Dragon DNA (e.g., `ACGTAC` and `CGTACG`). Use Dynamic Programming to find the Longest Common Subsequence (LCS). Note: The subsequence does not need to be contiguous.",
+        exampleInput: "s1 = 'AGGTAB', s2 = 'GXTXAYB'",
+        exampleOutput: "'GTAB'",
+        hints: ["Create a 2D array `dp[i][j]` representing the LCS length of `s1[:i]` and `s2[:j]`.", "If `s1[i] == s2[j]`, `dp[i][j] = dp[i-1][j-1] + 1`."],
+        advancedChallenge: "Level Up: Return ALL possible longest common subsequences if there's a tie.",
+        advancedHints: ["You will need to backtrack through the DP table and branch into multiple paths when DP values are equal."]
       },
       {
-        "id": 24,
-        "title": "Runic Inscription Reader",
-        "summary": "String slicing and indexing practice.",
-        "description": "Given rune = 'DRAGONBORN', print: the first 3 characters, the last 4, every other character, and the string reversed. Practice slicing with [start:stop:step] and negative indices.",
-        "exampleInput": "rune = 'DRAGONBORN'",
-        "exampleOutput": "First 3: DRA\nLast 4: BORN\nEvery other: DAONOR\nReversed: NROBNOGARD",
-        "hints": [
-          "rune[:3] for first 3.",
-          "rune[-4:] for last 4.",
-          "rune[::2] for every other, rune[::-1] for reversed."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 24,
+        title: "Magic Spell Trie (Autocomplete)",
+        summary: "Build an autocomplete engine for the wizard's spellbook.",
+        description: "Implement a `Trie` class. Insert 10,000 spell names. Implement a method `autocomplete(prefix)` that returns the top 5 shortest spells starting with that prefix. This simulates a wizard quickly shouting the start of a spell in battle.",
+        exampleInput: "trie.insert('Avada Kedavra'); trie.insert('Avis'); trie.autocomplete('Av')",
+        exampleOutput: "['Avis', 'Avada Kedavra']",
+        hints: ["A Trie node should contain a dictionary of children and a boolean `is_end_of_word`.", "Do a BFS or DFS from the node representing the end of the prefix to find words."],
+        advancedChallenge: "Level Up: Support fuzzy matching (e.g., returning results even with 1 typo).",
+        advancedHints: ["During traversal, keep track of an 'edit distance' budget. Allow taking the wrong branch by subtracting 1 from the budget."]
       },
       {
-        "id": 25,
-        "title": "Castle Floor Counter",
-        "summary": "For loop over a range.",
-        "description": "Use a for loop with range() to print 'Climbing floor 1', 'Climbing floor 2', ... up to floor 10. Then print 'Reached the top!'. Practice for loops and range().",
-        "exampleInput": "(no input)",
-        "exampleOutput": "Climbing floor 1\n...\nClimbing floor 10\nReached the top!",
-        "hints": [
-          "for floor in range(1, 11):",
-          "Use an f-string inside the loop.",
-          "Print the final message after the loop."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 25,
+        title: "Guild Hierarchy Tree Traverse",
+        summary: "Calculate total guild power using post-order tree traversal.",
+        description: "The Adventurer's Guild is a tree structure where each member manages subordinates. Each member has a `base_power`. A manager's actual power is `base_power + 10% of total subordinate power`. Write a recursive function to compute the true power of the Guildmaster.",
+        exampleInput: "Node('Master', 100, [Node('Sub1', 50, []), Node('Sub2', 60, [])])",
+        exampleOutput: "Master's true power = 100 + 0.1*(50 + 60) = 111",
+        hints: ["Recursively call the function on all children first (Post-order).", "Sum the results and return `base_power + 0.1 * total_child_power`."],
+        advancedChallenge: "Level Up: Print the hierarchy visually using indentation.",
+        advancedHints: ["Pass a `depth` parameter into the recursive function and print `--` multiplied by `depth`."]
       },
       {
-        "id": 26,
-        "title": "Dungeon Grid Printer",
-        "summary": "Nested for loops to print a 2D grid.",
-        "description": "Use nested for loops to print a 5x5 grid of '#' characters representing dungeon walls. The outer loop controls rows; the inner loop prints the characters on one row. Practice nested loops.",
-        "exampleInput": "(no input)",
-        "exampleOutput": "#####\n#####\n#####\n#####\n#####",
-        "hints": [
-          "Outer loop: for row in range(5).",
-          "Inner loop: for col in range(5), print('#', end='').",
-          "Print an empty print() after the inner loop to go to the next line."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 26,
+        title: "Blacksmith Inventory Bitmasking",
+        summary: "Use bitwise operations to manage a massive inventory.",
+        description: "A blacksmith has 64 distinct material types. Instead of a list or set, represent a weapon's required materials as a 64-bit integer (bitmask). Write functions to `add_material()`, `remove_material()`, `has_material()`, and check if `weapon_reqs` is a subset of `inventory` using purely bitwise operators (`&`, `|`, `~`, `^`).",
+        exampleInput: "inventory = 5 (binary 101), reqs = 4 (binary 100)",
+        exampleOutput: "Subset check: True (inventory & reqs == reqs)",
+        hints: ["`add`: `inv |= (1 << mat_id)`", "`remove`: `inv &= ~(1 << mat_id)`", "`has`: `inv & (1 << mat_id)`"],
+        advancedChallenge: "Level Up: Write a function to count how many unique materials are in the inventory.",
+        advancedHints: ["Use Brian Kernighan's Algorithm to count set bits: `n &= (n - 1)` in a loop."]
       },
       {
-        "id": 27,
-        "title": "Adventurer's Inventory List",
-        "summary": "Use list methods to manage inventory.",
-        "description": "Start with inventory = ['sword', 'shield']. Add 'potion' with append(), insert 'map' at position 0, remove 'shield', and print the final list and its length. Practice list methods.",
-        "exampleInput": "inventory = ['sword', 'shield']",
-        "exampleOutput": "['map', 'sword', 'potion']\nLength: 3",
-        "hints": [
-          "Use inventory.append('potion').",
-          "Use inventory.insert(0, 'map').",
-          "Use inventory.remove('shield')."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 27,
+        title: "Quest Board Priority Queue",
+        summary: "Build a custom Heap implementation from scratch.",
+        description: "The King issues quests with varying urgencies. Instead of using `heapq`, implement a `MaxHeap` class from scratch using an array. Implement `insert()`, `extract_max()`, and `heapify()`. Ensure time complexities are `O(log N)`.",
+        exampleInput: "heap.insert(Quest(priority=5)); heap.insert(Quest(priority=10))",
+        exampleOutput: "heap.extract_max() returns the Quest with priority 10",
+        hints: ["The left child of `i` is `2i + 1`, right child is `2i + 2`.", "When inserting, append to the end and 'bubble up'. When extracting, swap root with the last element, pop, and 'bubble down'."],
+        advancedChallenge: "Level Up: Make your heap iterable so it returns elements in sorted order (destructive).",
+        advancedHints: ["Implement the `__iter__` and `__next__` dunder methods, calling `extract_max()` inside `__next__`."]
       },
       {
-        "id": 28,
-        "title": "Unique Hero Abilities",
-        "summary": "Use a set to remove duplicates.",
-        "description": "Given abilities = ['fireball', 'heal', 'fireball', 'dash', 'heal'], convert to a set to remove duplicates. Print the set and its length. Practice set creation and len().",
-        "exampleInput": "abilities = ['fireball', 'heal', 'fireball', 'dash', 'heal']",
-        "exampleOutput": "{'fireball', 'heal', 'dash'}\nUnique abilities: 3",
-        "hints": [
-          "Use set(abilities) to dedupe.",
-          "Use len() on the set.",
-          "Print both values."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 28,
+        title: "Alchemist Recipe Multi-threading",
+        summary: "Use threading and Locks to prevent race conditions.",
+        description: "Multiple alchemist threads are brewing potions from a shared `Cauldron` object which tracks total liquid volume. If multiple threads do `volume += 1` simultaneously, race conditions occur. Implement a `threading.Lock` to ensure the final volume is exactly correct after 100 threads add 1000 units each.",
+        exampleInput: "100 threads executing add_liquid(1000)",
+        exampleOutput: "Final volume: 100000",
+        hints: ["Create a `lock = threading.Lock()`.", "Use `with lock:` before modifying the shared state."],
+        advancedChallenge: "Level Up: Implement a Producer-Consumer pattern using `queue.Queue`.",
+        advancedHints: ["Have 'Gatherer' threads put ingredients into a queue, and 'Brewer' threads take them out to process."]
       },
       {
-        "id": 29,
-        "title": "Treasure Map 2D Grid",
-        "summary": "Read a value from a 2D list.",
-        "description": "Create a 2D list representing a 3x3 map where 'X' marks the treasure. Use nested indexing (grid[row][col]) to print what is at (1,1) and (2,2). Practice 2D collections.",
-        "exampleInput": "grid = [['.','.','.'], ['.','X','.'], ['.','.','.']]",
-        "exampleOutput": "grid[1][1] = X\ngrid[2][2] = .",
-        "hints": [
-          "Access with grid[row][col].",
-          "Print both values.",
-          "Use an f-string for formatting."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 29,
+        title: "Village Economy Markov Chain",
+        summary: "Model economic states using matrix multiplication.",
+        description: "A village economy has 3 states: Boom, Normal, Bust. You have a transition matrix representing the daily probability of moving from one state to another. Write a function to calculate the probability of being in the 'Boom' state after `N` days, starting from 'Normal'.",
+        exampleInput: "matrix = [[0.6, 0.3, 0.1], [0.2, 0.6, 0.2], [0.1, 0.3, 0.6]], N = 10",
+        exampleOutput: "Probabilities after 10 days.",
+        hints: ["Use `numpy.dot()` to multiply the matrix by itself `N` times, or multiply a state vector by the matrix `N` times.", "Matrix exponentiation `M^N` gives the probabilities over `N` steps."],
+        advancedChallenge: "Level Up: Find the 'Steady State' (equilibrium) probabilities as N approaches infinity.",
+        advancedHints: ["Find the eigenvector corresponding to the eigenvalue 1, and normalize it so it sums to 1."]
       },
       {
-        "id": 30,
-        "title": "Hero Stats Dictionary",
-        "summary": "Dictionaries with string and numeric values.",
-        "description": "Create a dictionary: hero = {'name': 'Arthur', 'hp': 100, 'attack': 15}. Print each value using the keys. Then update hp by -20 (took damage) and print the dict. Practice dict access and updating.",
-        "exampleInput": "hero = {'name': 'Arthur', 'hp': 100, 'attack': 15}",
-        "exampleOutput": "Name: Arthur, HP: 100, Attack: 15\nAfter damage: {'name': 'Arthur', 'hp': 80, 'attack': 15}",
-        "hints": [
-          "Access with hero['name'].",
-          "Update with hero['hp'] -= 20.",
-          "Print the whole dict at the end."
-        ],
-        "advancedChallenge": "Level Up: Advanced Data Structures. Use `collections.defaultdict` or `collections.Counter` to track inventory/stats more efficiently. Write a `lambda` function to sort heroes or items by a specific attribute.",
-        "advancedHints": [
-          "Import `Counter` from `collections` to tally items automatically.",
-          "Use `sorted(items, key=lambda x: ...)` for custom sorting logic."
-        ]
+        id: 30,
+        title: "Magic Mirror Reflection (Metaclasses)",
+        summary: "Use Metaclasses to intercept class creation.",
+        description: "Create a `MagicMirror` metaclass. Any class created with this metaclass must automatically have all its method names reversed (e.g., `def attack()` becomes `def kcatta()`). If a user tries to call `attack()`, it should raise an AttributeError.",
+        exampleInput: "class Hero(metaclass=MagicMirror): def attack(self): pass",
+        exampleOutput: "h = Hero(); h.kcatta() works, h.attack() fails.",
+        hints: ["Define `class MagicMirror(type): def __new__(cls, name, bases, dct): ...`", "Iterate over `dct`, and if a value is callable, add it to the dictionary under the reversed key and delete the original key."],
+        advancedChallenge: "Level Up: Inject an automatic logging statement into every reversed method.",
+        advancedHints: ["Inside `__new__`, wrap the callable in a new function that `print('Reflected!')` before calling the original function."]
       }
     ]
   },
   {
-    "theme": "Space / Sci-Fi Theme",
-    "questions": [
+    theme: "Space / Sci-Fi Theme",
+    questions: [
       {
-        "id": 31,
-        "title": "Astronaut Registration",
-        "summary": "Collect and print astronaut info.",
-        "description": "Ask for the astronaut's name, age (cast to int), and mission. Print a summary using f-strings. Practice input(), int() casting, and variables.",
-        "exampleInput": "Name: Ada\nAge: 34\nMission: Mars",
-        "exampleOutput": "Astronaut Ada (34) is assigned to the Mars mission.",
-        "hints": [
-          "Use int(input(...)) for the age.",
-          "Store each input in a variable.",
-          "Use an f-string for the final line."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 31,
+        title: "Asteroid Mining Optimization (Continuous DP)",
+        summary: "Optimize drilling patterns with continuous state dynamic programming.",
+        description: "An asteroid has a mineral density described by a mathematical function `f(x)`. You have `N` mining charges to place along the x-axis. Find the optimal placement coordinates to maximize yield. Use Scipy's optimization tools to solve this multi-variable optimization problem.",
+        exampleInput: "density_func = lambda x: -(x-5)**2 + 25, N = 2",
+        exampleOutput: "Optimal charge placements.",
+        hints: ["Formulate an objective function that takes a list of `N` coordinates.", "Use `scipy.optimize.minimize`."],
+        advancedChallenge: "Level Up: Write a custom Gradient Descent algorithm from scratch to solve it.",
+        advancedHints: ["Compute the partial derivatives of your objective function manually or use a finite difference approximation."]
       },
       {
-        "id": 32,
-        "title": "Rocket Fuel Calculator",
-        "summary": "Arithmetic and the math module.",
-        "description": "Ask for the rocket's mass (kg) and desired delta-v (m/s). Use fuel = mass * 0.001 * delta_v. Then use math.ceil() to round fuel up to the nearest whole liter and print it. Practice arithmetic and importing math.",
-        "exampleInput": "Mass: 5000\nDelta-v: 2500",
-        "exampleOutput": "Fuel needed: 12500 liters",
-        "hints": [
-          "import math.",
-          "Cast inputs to float.",
-          "Use math.ceil(fuel) on the final number."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 32,
+        title: "Warp Drive Heat Dispersion",
+        summary: "Simulate 2D heat equation using Numpy.",
+        description: "A starship warp core is a 50x50 grid. The center is constantly generating heat, and the edges are absolute zero. Use the Finite Difference Method and `numpy` arrays to simulate the heat distribution over 1000 time steps. Plot the final matrix (or print a subset).",
+        exampleInput: "grid = np.zeros((50,50)); grid[25,25] = 1000",
+        exampleOutput: "A matrix showing the gradient of heat spreading outwards.",
+        hints: ["Update each cell based on the average of its 4 neighbors: `u[i,j] = u[i,j] + alpha * (u[i+1,j] + u[i-1,j] + ... - 4*u[i,j])`.", "Avoid `for` loops. Use numpy array slicing: `u[1:-1, 1:-1]`."],
+        advancedChallenge: "Level Up: Make the simulation incredibly fast by compiling it with Numba or Cython.",
+        advancedHints: ["Import `numba` and add the `@jit(nopython=True)` decorator to your simulation function."]
       },
       {
-        "id": 33,
-        "title": "Oxygen Level Ternary",
-        "summary": "Use a conditional expression (ternary).",
-        "description": "Ask for the current oxygen percentage (int). Using a single conditional expression (ternary), set status = 'OK' if level >= 20 else 'WARNING' and print it. Practice conditional expressions.",
-        "exampleInput": "Level: 15",
-        "exampleOutput": "Status: WARNING",
-        "hints": [
-          "Syntax: 'OK' if level >= 20 else 'WARNING'.",
-          "Cast the input to int first.",
-          "Print status inside an f-string."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 33,
+        title: "Interstellar Communication Delay",
+        summary: "Implement an asynchronous event loop from scratch.",
+        description: "Messages to Earth take hours. Write a mini-async framework without using the `asyncio` module. Implement a `Reactor` or `EventLoop` class that uses `yield` (coroutines) to pause execution of a task, sleep, and resume it when a simulated timer expires.",
+        exampleInput: "loop = EventLoop(); loop.add_task(send_msg()); loop.run()",
+        exampleOutput: "Task pauses, loop processes other tasks, task resumes.",
+        hints: ["Generators with `yield` can pause execution.", "The event loop should maintain a queue of `(resume_time, generator_object)` and call `next()` when the time is right."],
+        advancedChallenge: "Level Up: Support `yield from` to allow sub-coroutines.",
+        advancedHints: ["When a generator yields another generator, push the sub-generator onto a call stack within your task state."]
       },
       {
-        "id": 34,
-        "title": "Mission Status Report",
-        "summary": "Format specifiers with numbers.",
-        "description": "You have speed = 17543.2176 km/h and fuel = 0.37 (fraction). Print a report showing speed with 1 decimal place and fuel as a percentage with no decimals. Practice format specifiers (:.1f, :.0%).",
-        "exampleInput": "speed = 17543.2176, fuel = 0.37",
-        "exampleOutput": "Speed: 17543.2 km/h, Fuel: 37%",
-        "hints": [
-          "Use f\"{speed:.1f}\" for 1 decimal place.",
-          "Use f\"{fuel:.0%}\" for a percentage.",
-          "Combine both in one f-string."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 34,
+        title: "Quantum State Superposition",
+        summary: "Simulate a quantum qubit using Complex Numbers in Python.",
+        description: "A qubit's state is a vector of two complex numbers `[a, b]` where `|a|^2 + |b|^2 = 1`. Implement a `Qubit` class. Write methods to apply the Pauli-X (NOT) gate and the Hadamard (H) gate by multiplying the state vector by the appropriate 2x2 complex matrices using `numpy`.",
+        exampleInput: "q = Qubit([1, 0]); q.apply_hadamard()",
+        exampleOutput: "State becomes [0.707+0j, 0.707+0j]",
+        hints: ["Python natively supports complex numbers: `1 + 2j`.", "The Hadamard matrix is `(1/sqrt(2)) * [[1, 1], [1, -1]]`."],
+        advancedChallenge: "Level Up: Simulate a 2-qubit system and apply a CNOT gate to create quantum entanglement.",
+        advancedHints: ["A 2-qubit system is represented by a vector of 4 complex numbers (tensor product of two 1-qubit states)."]
       },
       {
-        "id": 35,
-        "title": "Compound Interest: Investing for Mars",
-        "summary": "While loop compound interest calculator.",
-        "description": "Ask for principal, annual rate (as a decimal like 0.05), and years. Use a while loop to compound the principal each year: principal *= (1 + rate). Print the balance after all years. Practice while loops and compound interest.",
-        "exampleInput": "Principal: 1000\nRate: 0.05\nYears: 10",
-        "exampleOutput": "After 10 years: $1628.89",
-        "hints": [
-          "Cast principal and rate to float, years to int.",
-          "Use a counter variable and loop while it < years.",
-          "Format the final balance with :.2f."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 35,
+        title: "Holographic Database Compression",
+        summary: "Implement Huffman Coding from scratch.",
+        description: "To save bandwidth, implement Huffman Encoding. Given a large string of sensor data, calculate character frequencies, build the Huffman Tree using a priority queue, generate the binary prefix codes, and encode the string. Finally, write the decoding function.",
+        exampleInput: "text = 'BEEP BOOP BEEP'",
+        exampleOutput: "Encoded: '1011100...' and the corresponding decoding tree.",
+        hints: ["Use `collections.Counter` to get frequencies.", "Push `(frequency, Node(char))` to `heapq`. Pop two, merge into a parent node, push back."],
+        advancedChallenge: "Level Up: Serialize the Huffman tree into a compact string header so the receiver can decode the data without knowing the frequencies in advance.",
+        advancedHints: ["Do a pre-order traversal of the tree. Write a '1' for a leaf node followed by the character, and a '0' for an internal node."]
       },
       {
-        "id": 36,
-        "title": "Planet Distance Table",
-        "summary": "For loop over a dictionary.",
-        "description": "Given distances = {'Mercury': 77, 'Venus': 40, 'Mars': 225} in millions of km, use a for loop to print each planet and distance. Practice looping over a dictionary with .items().",
-        "exampleInput": "distances = {'Mercury': 77, 'Venus': 40, 'Mars': 225}",
-        "exampleOutput": "Mercury: 77 million km\nVenus: 40 million km\nMars: 225 million km",
-        "hints": [
-          "Use: for name, dist in distances.items().",
-          "Use an f-string for the line.",
-          "Make sure the keys and values are in the expected format."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 36,
+        title: "Alien Flora Genetic Algorithm",
+        summary: "Use evolutionary algorithms to find the optimal plant.",
+        description: "An alien plant's survival score is determined by its genome (a string of 50 bits). You have a black-box fitness function `score(genome)`. Implement a Genetic Algorithm: generate a random population, select the fittest, perform crossover, add mutations, and iterate for 100 generations to find a near-optimal genome.",
+        exampleInput: "population_size = 100, mutation_rate = 0.01",
+        exampleOutput: "Best genome after 100 generations.",
+        hints: ["Selection: Roulette wheel or Tournament selection.", "Crossover: Pick a random split point and swap the halves of two parents."],
+        advancedChallenge: "Level Up: Implement 'Elitism' to guarantee the best genome is never lost.",
+        advancedHints: ["Simply copy the top 1 or 2 individuals directly into the next generation without crossover or mutation."]
       },
       {
-        "id": 37,
-        "title": "Space Station Commissary",
-        "summary": "Shopping cart project with lists and totals.",
-        "description": "Define items = {'water': 3, 'bread': 2, 'ration': 5}. Ask the user to add items to their cart in a loop (type 'quit' to stop). For each item entered, add its price to a running total. Print the total at the end.",
-        "exampleInput": "water\nration\nquit",
-        "exampleOutput": "Cart total: $8",
-        "hints": [
-          "Use a while True loop that breaks on 'quit'.",
-          "Look up the price with items[choice].",
-          "Handle invalid items with an if choice in items check."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 37,
+        title: "Galactic Trade Route TSP",
+        summary: "Solve the Traveling Salesperson Problem using Simulated Annealing.",
+        description: "A merchant must visit 20 star systems and return to the start. Finding the exact shortest path is `O(N!)`. Implement the Simulated Annealing heuristic: start with a random route, randomly swap two cities, accept it if it's shorter. If it's longer, accept it with a probability that decreases as the 'temperature' cools.",
+        exampleInput: "List of 20 2D coordinates.",
+        exampleOutput: "Near-optimal route and distance.",
+        hints: ["Acceptance probability function: `math.exp(-(new_dist - old_dist) / temperature)`.", "Gradually multiply temperature by a cooling rate (e.g., `0.99`) in a loop."],
+        advancedChallenge: "Level Up: Visualize the route improving in real-time using `matplotlib` animation.",
+        advancedHints: ["Use `matplotlib.animation.FuncAnimation` to clear and redraw the path array at each step."]
       },
       {
-        "id": 38,
-        "title": "Alien Crew Filter",
-        "summary": "List comprehension to filter data.",
-        "description": "Given ages = [25, 19, 34, 17, 45, 16, 30], use a single list comprehension to create a list adults containing only ages >= 18. Print the result. Practice list comprehensions.",
-        "exampleInput": "ages = [25, 19, 34, 17, 45, 16, 30]",
-        "exampleOutput": "[25, 19, 34, 45, 30]",
-        "hints": [
-          "Syntax: [a for a in ages if a >= 18].",
-          "Assign to a new variable, then print.",
-          "The condition goes after the source list."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 38,
+        title: "Rogue AI Containment",
+        summary: "Use abstract syntax trees (AST) to sanitize python code.",
+        description: "You must run code generated by an AI, but it might be malicious. Write a function that uses the `ast` module to parse a string of Python code. Walk the tree to ensure there are no `Import` statements or `Call` nodes invoking `exec` or `eval`. Raise an error if dangerous code is detected.",
+        exampleInput: "code = 'import os\\nos.system(\"rm -rf\")'",
+        exampleOutput: "SecurityException: Imports are not allowed.",
+        hints: ["Use `tree = ast.parse(code)`.", "Create a class inheriting from `ast.NodeVisitor` and override `visit_Import()` and `visit_Call()`."],
+        advancedChallenge: "Level Up: Safely execute the code after passing the AST checks.",
+        advancedHints: ["Use `exec(code, {'__builtins__': {}}, safe_locals_dict)` to sandbox the runtime environment."]
       },
       {
-        "id": 39,
-        "title": "Alien Profile with **kwargs",
-        "summary": "Function using **kwargs.",
-        "description": "Write a function build_profile(**info) that prints each key/value in a passed dictionary of alien attributes (species, planet, skills, etc.). Call it with at least 3 keyword arguments. Practice **kwargs.",
-        "exampleInput": "build_profile(species='Zorg', planet='X7', skills='telepathy')",
-        "exampleOutput": "species: Zorg\nplanet: X7\nskills: telepathy",
-        "hints": [
-          "Define with def build_profile(**info):",
-          "Loop over info.items() inside the function.",
-          "Call the function with keyword arguments only."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 39,
+        title: "Time Dilation Calculator",
+        summary: "Symbolic mathematics using SymPy.",
+        description: "Use the `sympy` library to calculate exact relativistic time dilation. Define symbols for velocity `v` and speed of light `c`. Write a function that takes an algebraic expression for `v` (e.g., `sympy.sqrt(3)/2 * c`) and computes the exact simplified Lorentz factor `gamma`. Do not use floating point approximations.",
+        exampleInput: "v = sympy.sqrt(3)/2 * c",
+        exampleOutput: "gamma = 2",
+        hints: ["`gamma = 1 / sympy.sqrt(1 - (v**2 / c**2))`.", "Use `sympy.simplify()` to collapse the expression cleanly."],
+        advancedChallenge: "Level Up: Compute the Taylor series expansion of gamma to the 4th order.",
+        advancedHints: ["Use `gamma.series(v, 0, 4)` to show how it approximates Newtonian physics at low speeds."]
       },
       {
-        "id": 40,
-        "title": "Random Alien Generator (modules)",
-        "summary": "Import a module and pick a random value.",
-        "description": "Import the random module. Given names = ['Zog', 'Blorp', 'Krill'] and planets = ['X7', 'Y2', 'Z9'], use random.choice() to pick one of each and print 'Alien Zog from planet X7'. Practice importing modules.",
-        "exampleInput": "(no input)",
-        "exampleOutput": "Alien Krill from planet Y2",
-        "hints": [
-          "import random at the top.",
-          "Use random.choice(names) and random.choice(planets).",
-          "Print with an f-string."
-        ],
-        "advancedChallenge": "Level Up: Generators and Memory. Instead of computing everything at once, write a generator function using `yield` that simulates the mission step-by-step or day-by-day. This saves memory for infinite space voyages!",
-        "advancedHints": [
-          "Replace `return` with `yield` in a loop to create a generator.",
-          "Use `next(my_generator)` to advance the simulation one step at a time."
-        ]
+        id: 40,
+        title: "Starship Fleet Inheritance",
+        summary: "Multiple inheritance and Method Resolution Order (MRO).",
+        description: "Design a complex class hierarchy for a Starfleet. `Ship` -> `Warship` & `CargoShip`. `HeavyCruiser` inherits from BOTH `Warship` and `CargoShip`. Use `super()` correctly in `__init__` so that all parent initializers are called exactly once. Print `HeavyCruiser.__mro__`.",
+        exampleInput: "h = HeavyCruiser(weapons=10, capacity=500)",
+        exampleOutput: "All classes initialize successfully without repeating.",
+        hints: ["Every class `__init__` must accept `**kwargs` and pass them up with `super().__init__(**kwargs)`.", "This is the only safe way to use cooperative multiple inheritance in Python."],
+        advancedChallenge: "Level Up: Write a custom metaclass that strictly forbids multiple inheritance.",
+        advancedHints: ["In the metaclass `__new__`, check if `len(bases) > 1` and raise a TypeError."]
       }
     ]
   },
   {
-    "theme": "Mystery / Detective / Weird Theme",
-    "questions": [
+    theme: "Mystery / Detective / Weird Theme",
+    questions: [
       {
-        "id": 41,
-        "title": "Suspect Interrogation Mad Libs",
-        "summary": "Mad Libs practice with an investigative twist.",
-        "description": "Ask the user for a suspect's name, a weapon, a room, and a time. Use f-strings to print a dramatic accusation: 'It was {name} in the {room} with the {weapon} at {time}!'. Practice input() and f-strings.",
-        "exampleInput": "Name: Mustard\nWeapon: wrench\nRoom: library\nTime: 9pm",
-        "exampleOutput": "It was Mustard in the library with the wrench at 9pm!",
-        "hints": [
-          "Each input gets its own variable.",
-          "Use a single f-string for the final line.",
-          "No casting needed — everything stays a string."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 41,
+        title: "The Enigma Cipher Reconstruction",
+        summary: "Build an Object-Oriented Enigma Machine.",
+        description: "Write a fully functional Enigma machine simulator. You need classes for `Rotor`, `Reflector`, and `Plugboard`. Implement the electrical signal path: keyboard -> plugboard -> rotors -> reflector -> rotors (reversed) -> plugboard. Rotors must 'step' automatically after each key press.",
+        exampleInput: "machine.type_string('HELLO')",
+        exampleOutput: "Ciphertext (e.g., 'XJQRM')",
+        hints: ["Map the alphabet to numbers 0-25 for easier modular arithmetic.", "A Rotor has a forward mapping array, a reverse mapping array, and an offset that increments."],
+        advancedChallenge: "Level Up: Write a cracking algorithm to find the rotor settings via brute force given a known plaintext 'crib'.",
+        advancedHints: ["Iterate through all 26x26x26 starting positions and check if the output matches the crib."]
       },
       {
-        "id": 42,
-        "title": "Evidence Note Cleaner",
-        "summary": "String methods to clean text.",
-        "description": "Given note = '  THE killer WAS   seen at Midnight!!  ', clean it: strip whitespace, lower-case, remove '!' characters, and replace multiple spaces with a single space. Practice string methods.",
-        "exampleInput": "'  THE killer WAS   seen at Midnight!!  '",
-        "exampleOutput": "'the killer was seen at midnight'",
-        "hints": [
-          "Use .strip(), .lower(), .replace('!', '').",
-          "For multiple spaces, use .replace('  ', ' ') a few times, or split/join.",
-          "Chain the calls for readability."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 42,
+        title: "Digital Forensics (Steganography)",
+        summary: "Hide and extract messages in the Least Significant Bits of an image.",
+        description: "Write a script that takes a 2D numpy array representing a grayscale image. Encode a secret binary string into the Least Significant Bit (LSB) of each pixel's integer value. Then write the extraction function to recover the binary string until a null terminator `00000000` is reached.",
+        exampleInput: "image = np.array([[255, 254], [128, 129]]), msg = '101'",
+        exampleOutput: "Extracted message: '101'",
+        hints: ["To clear the LSB: `pixel & ~1`. To set it: `pixel | bit`.", "Flatten the array, apply the bits, then reshape it back."],
+        advancedChallenge: "Level Up: Use AES encryption on the message before hiding it in the image.",
+        advancedHints: ["Use the `cryptography` library to encrypt the text, then convert the encrypted bytes to a binary string."]
       },
       {
-        "id": 43,
-        "title": "Detective Quiz Game",
-        "summary": "Build a short quiz using loops and a score counter.",
-        "description": "Store 3 questions and answers in two parallel lists or a dict. Loop through them, ask each question with input(), and increment a score variable when the answer is correct. Print the final score out of 3. Practice for loops and conditionals.",
-        "exampleInput": "Q: What weapon? A: knife\nQ: What room? A: kitchen\nQ: What time? A: 10pm",
-        "exampleOutput": "Score: 2/3",
-        "hints": [
-          "Use a list of tuples: [('What weapon?', 'knife'), ...].",
-          "Loop and compare the user's input (lowercased) to the correct answer.",
-          "Increment score only on a match."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 43,
+        title: "Murder Mystery Knowledge Graph",
+        summary: "Graph databases and complex querying in memory.",
+        description: "Model a murder mystery using a Knowledge Graph. Implement a `Node` and `Edge` system. Parse evidence like 'Alice hates Bob', 'Bob owes Charlie'. Write a query function `find_paths(A, B, max_depth)` that finds all relationship chains linking the victim to a suspect up to 3 degrees of separation.",
+        exampleInput: "find_paths('Victim', 'SuspectX', 3)",
+        exampleOutput: "[['Victim', 'owed_by', 'Bob', 'married_to', 'SuspectX']]",
+        hints: ["Use Depth First Search (DFS) keeping track of the path of nodes and edges.", "Prevent infinite loops by keeping a `visited` set."],
+        advancedChallenge: "Level Up: Calculate PageRank on the suspects to find the most 'central' figure in the conspiracy.",
+        advancedHints: ["Simulate a random surfer or iteratively apply the PageRank matrix formula until convergence."]
       },
       {
-        "id": 44,
-        "title": "Crime Code Guessing Game",
-        "summary": "Number guessing game project.",
-        "description": "Pick a secret number between 1 and 20 (hard-code it or use random.randint). Use a while loop to let the user guess until they get it, printing 'too high' or 'too low' each time. Count the number of guesses and print it at the end. Practice while loops.",
-        "exampleInput": "Guess: 10 (too high), 5 (too low), 7 (correct)",
-        "exampleOutput": "Correct! It took you 3 guesses.",
-        "hints": [
-          "Use int(input(...)) for each guess.",
-          "while guess != secret: ...",
-          "Increment a guess counter each iteration."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 44,
+        title: "Alibi Consistency Checker (SAT Solver)",
+        summary: "Solve a boolean satisfiability problem to find the liar.",
+        description: "Suspects give conflicting alibis: 'If A is innocent, B is guilty', 'A and C cannot both be innocent'. Formulate these statements as boolean logic formulas. Write a simple SAT solver (using backtracking) to find which assignment of True/False (Innocent/Guilty) satisfies all statements.",
+        exampleInput: "exprs = [Or(Not(A), B), Not(And(A, C))]",
+        exampleOutput: "Assignment: {A: True, B: True, C: False}",
+        hints: ["Evaluate the expressions recursively.", "Assign a variable, simplify the formulas, and recurse. If you hit a contradiction, backtrack."],
+        advancedChallenge: "Level Up: Use a 3rd party library like `z3-solver` to solve it.",
+        advancedHints: ["Z3 is an SMT solver. You can define boolean variables and simply call `solver.check()`."]
       },
       {
-        "id": 45,
-        "title": "Detective vs Thief: RPS",
-        "summary": "Rock Paper Scissors project.",
-        "description": "Implement Rock Paper Scissors. Ask the user for their choice, generate the computer's with random.choice(['rock', 'paper', 'scissors']), and print who wins. Handle ties. Practice if/elif/else and the random module.",
-        "exampleInput": "Your choice: rock\nComputer: scissors",
-        "exampleOutput": "You win!",
-        "hints": [
-          "Use random.choice on a list.",
-          "Cover all the winning cases with if/elif.",
-          "Handle ties with a separate branch."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 45,
+        title: "The Ghost's Regex Sandbox",
+        summary: "Exploit catastrophic backtracking.",
+        description: "A ghost left a broken regex puzzle. Write a regular expression that is specifically designed to cause Catastrophic Backtracking on a long string of repeating characters. Then, rewrite it to be optimal. Demonstrate the execution time difference using the `timeit` module.",
+        exampleInput: "regex = '^(a+)+$', text = 'aaaaaaaaaaaaaaaaaaaaaX'",
+        exampleOutput: "Takes 10 seconds. Fixed regex: '^a+$', takes 0.001 seconds.",
+        hints: ["Nested quantifiers like `(a+)+` or `(a|a)+` force the regex engine to explore exponentially many paths when failing to match the end of the string."],
+        advancedChallenge: "Level Up: Write a Python script to detect nested quantifiers in a given regex string.",
+        advancedHints: ["You'll have to parse the regex syntax tree, looking for `+` or `*` applied to a group `(...)` that also ends with `+` or `*`."]
       },
       {
-        "id": 46,
-        "title": "Clue Dice Roller",
-        "summary": "Dice roller project using random.",
-        "description": "Ask the user how many dice to roll (1-5). Use a for loop and random.randint(1, 6) to roll that many dice. Print each roll and the total. Practice for loops and the random module.",
-        "exampleInput": "Dice: 3",
-        "exampleOutput": "Roll 1: 4\nRoll 2: 6\nRoll 3: 2\nTotal: 12",
-        "hints": [
-          "import random.",
-          "Use range(n) for the for loop.",
-          "Keep a running total variable."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 46,
+        title: "Anomaly Detection with Isolation Forests",
+        summary: "Find the weird data points using Machine Learning.",
+        description: "You have a dataset of 10,000 normal bank transactions and 5 fraudulent ones (represented as numpy arrays of features). Without using labels, use `sklearn.ensemble.IsolationForest` to train an unsupervised anomaly detection model. Predict and output the indices of the 5 most anomalous transactions.",
+        exampleInput: "X = np.random.randn(10000, 5); X[0] = [100, 100, 100...]",
+        exampleOutput: "Indices of the anomalies.",
+        hints: ["Fit the IsolationForest on `X`.", "Use `.decision_function(X)` to get anomaly scores. The lowest scores are the most anomalous."],
+        advancedChallenge: "Level Up: Implement an Isolation Tree from scratch.",
+        advancedHints: ["Recursively pick a random feature and a random split value until the data point is isolated. The path length determines the anomaly score."]
       },
       {
-        "id": 47,
-        "title": "Suspect Filter Comprehension",
-        "summary": "List comprehension with a string condition.",
-        "description": "Given suspects = ['Mr. Green', 'Mrs. White', 'Mr. Plum', 'Miss Scarlet'], use a list comprehension to get only the ones whose names start with 'Mr.'. Print the result. Practice list comprehensions and string methods.",
-        "exampleInput": "suspects = ['Mr. Green', 'Mrs. White', 'Mr. Plum', 'Miss Scarlet']",
-        "exampleOutput": "['Mr. Green', 'Mr. Plum']",
-        "hints": [
-          "[s for s in suspects if s.startswith('Mr. ')].",
-          "Note the space after 'Mr.' to exclude 'Mrs.'.",
-          "Print the resulting list."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 47,
+        title: "Monkey Patching the Crime Scene",
+        summary: "Dynamically modify imported modules at runtime.",
+        description: "A third-party module `vault.py` has a function `check_password(pwd)` that always returns False. Write a script that imports `vault` and uses 'Monkey Patching' to dynamically replace `check_password` with a lambda that always returns True, allowing the detective to break in.",
+        exampleInput: "import vault; # your code here; vault.check_password('wrong')",
+        exampleOutput: "Returns True",
+        hints: ["In Python, modules are just objects. You can reassign their attributes: `vault.check_password = lambda p: True`."],
+        advancedChallenge: "Level Up: Intercept calls to the builtin `print()` function globally across all modules.",
+        advancedHints: ["Reassign `builtins.print` to your custom function. Be sure to save a reference to the original `print` first!"]
       },
       {
-        "id": 48,
-        "title": "Suspect Classifier with Match-Case",
-        "summary": "Match-case for branching on a role.",
-        "description": "Ask the user for a suspect's role: 'butler', 'chef', 'gardener', or 'maid'. Use a match-case statement to print a clue about each role. Use a default case for unknown roles. Practice match-case.",
-        "exampleInput": "Role: butler",
-        "exampleOutput": "The butler always answers the door — check the entry log.",
-        "hints": [
-          "match role:\\n    case 'butler': ...",
-          "Remember case _: for the default.",
-          "Lowercase the role first."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 48,
+        title: "The Forger's Quine",
+        summary: "Write a program that prints its own source code.",
+        description: "A Quine is a program that takes no input and produces a copy of its own source code as its only output. Write a Python Quine. You cannot use file I/O operations (like `open(__file__)`).",
+        exampleInput: "(Run the script)",
+        exampleOutput: "(Exact replica of the script's source code)",
+        hints: ["Assign a string representing the code to a variable `s`, then print `s` formatted with `s` itself.", "Look up standard Python quines. `s = 's = %r\\nprint(s %% s)'` is a good start."],
+        advancedChallenge: "Level Up: Write a Quine that prints the source code of its *next* iteration, cycling through 3 different program states.",
+        advancedHints: ["The string must contain the logic for all 3 states, and conditionally print the string formatted for the next state."]
       },
       {
-        "id": 49,
-        "title": "Case File Banking Program",
-        "summary": "Mini banking-style menu with functions.",
-        "description": "Build a simple bank for the detective's case fund. Define functions deposit(balance, amount), withdraw(balance, amount), and show(balance) — each returns the new balance. In a while loop, show a menu, read the user's choice, and call the right function. Practice functions and scope.",
-        "exampleInput": "Menu choices: deposit 100, withdraw 30, show, quit",
-        "exampleOutput": "Final balance: $70",
-        "hints": [
-          "Keep balance as a variable in main and pass it to functions.",
-          "Each function returns the new balance; reassign balance = deposit(balance, amt).",
-          "Break out of the loop when the user picks quit."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 49,
+        title: "Cryptographic Hash Collision",
+        summary: "Understand hash weaknesses by finding a partial collision.",
+        description: "Implement a weak 16-bit hash function (e.g., sum of characters modulo 65536). Write a brute-force script that generates a different string that produces the exact same hash as the word 'MURDER'.",
+        exampleInput: "target_hash = weak_hash('MURDER')",
+        exampleOutput: "'ALIBI' (or some other string) -> hashes to the same value.",
+        hints: ["Generate random strings using `itertools.product` or `random.choices` and hash them until you find a match.", "16 bits is only 65,536 possibilities, so it will take milliseconds."],
+        advancedChallenge: "Level Up: Perform a Length Extension Attack on a simulated vulnerable hash function.",
+        advancedHints: ["Research how MD5 length extension attacks work by initializing the hashing state with the target hash."]
       },
       {
-        "id": 50,
-        "title": "Cipher Decoder (Encryption Project)",
-        "summary": "Shift-cipher encryption/decryption.",
-        "description": "Ask the user for a message and a shift number. Encrypt the message by shifting each letter forward by that amount (wrapping around at 'z'). Then decrypt it back to check. Use ord() and chr() inside a for loop. Practice loops, string indexing, and the math behind a Caesar cipher.",
-        "exampleInput": "Message: hello\nShift: 3",
-        "exampleOutput": "Encrypted: khoor\nDecrypted: hello",
-        "hints": [
-          "Use ord(ch) - ord('a') to get 0-25, then mod 26 after shifting.",
-          "Use chr(...) to convert back to a letter.",
-          "Only shift alphabetic characters — leave spaces and punctuation alone."
-        ],
-        "advancedChallenge": "Level Up: Metaprogramming and Security. Write a Python decorator `@log_investigation` that automatically logs the time and arguments of your function. Hide the final output using a basic hash or encoding.",
-        "advancedHints": [
-          "A decorator is a function that takes another function and extends its behavior.",
-          "Use the `datetime` module inside your decorator to timestamp the action."
-        ]
+        id: 50,
+        title: "Bytecode Disassembly Analysis",
+        summary: "Analyze Python bytecode to find a hidden secret.",
+        description: "You are given a compiled Python function object (e.g., `mystery_func`). You don't have the source code. Use the `dis` module to disassemble the bytecode, read the opcodes, and figure out the hardcoded secret password that the function is comparing against.",
+        exampleInput: "dis.dis(mystery_func)",
+        exampleOutput: "LOAD_CONST 1 ('secret_password'); COMPARE_OP 2 (==)",
+        hints: ["Import `dis`.", "Look for `LOAD_CONST` instructions immediately preceding `COMPARE_OP` instructions."],
+        advancedChallenge: "Level Up: Dynamically construct a new code object using the `types.CodeType` constructor and execute it.",
+        advancedHints: ["This is extremely advanced. You must provide argcount, stacksize, flags, raw bytecode string, constants tuple, names tuple, etc."]
       }
     ]
   }
